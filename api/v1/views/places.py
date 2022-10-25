@@ -45,7 +45,7 @@ def delete_place(place_id):
 
 
 @app_views.route('/cities/<string:city_id>/places',
-                 method=['POST'], strict_slashes=False)
+                 methods=['POST'], strict_slashes=False)
 def post_place(city_id):
     """create new place in a city identified by city_id"""
     city = storage.get("City", city_id)
@@ -68,7 +68,7 @@ def post_place(city_id):
 
 
 @app_views.route('places/<string:place_id>',
-                 method=['PUT'], strict_slashes=False)
+                 methods=['PUT'], strict_slashes=False)
 def put_place(place_id):
     """update a place identified with place_id"""
     place = storage.get("Place", place_id)
