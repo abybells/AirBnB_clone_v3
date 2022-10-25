@@ -55,7 +55,7 @@ def post_state():
                  methods=['PUT'], strict_slashes=False)
 def put_state():
     """update a state by state_id"""
-    state = storagez.get("State", state_id)
+    state = storage.get("State", state_id)
     if state is None:
         abort(404)
     if not request.get_json():
