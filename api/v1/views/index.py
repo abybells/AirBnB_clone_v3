@@ -1,17 +1,8 @@
 #!/usr/bin/python3
 """index.py to connect to API"""
 from app.v1.views import app_views
-from flask import Flask, Blueprint, jsonify
+from flask import jsonify
 from models import storage
-
-all_classes = {
-        "amenities": "Amenity",
-        "cities": "City",
-        "places": "Place",
-        "reviews": "Review",
-        "states": "State",
-        "users": "User"
-        }
 
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
@@ -23,7 +14,10 @@ def status():
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def stats():
     """display number of objects by type"""
-    return_dict = {}
-    for key, value in all_classes.items():
-        return_dict[value] = storage.count(key)
-    return jsonify(return_dict)
+    classes = {"Amenity": "amenities", "City": "cities",
+               "Place": "places", "Review": "reviews",
+               "State": "states", "User": "users"}
+    stats_dict = {}
+    for cls in classes.keys():
+        stats_dict[classes[cls]] = storage.count(cls)
+    return jsonify(stats_dict)
