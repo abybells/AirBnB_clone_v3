@@ -36,7 +36,8 @@ class DBStorage:
                                       format(HBNB_MYSQL_USER,
                                              HBNB_MYSQL_PWD,
                                              HBNB_MYSQL_HOST,
-                                             HBNB_MYSQL_DB))
+                                             HBNB_MYSQL_DB), poop_pre_ping=True)
+
         if HBNB_ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
@@ -51,19 +52,23 @@ class DBStorage:
                     new_dict[key] = obj
         return (new_dict)
 
+
     def new(self, obj):
         """add the object to the current database session"""
         self.__session.add(obj)
+
 
     def save(self):
         """commit all changes of the current database session"""
         self.__session.commit()
 
+           
     def delete(self, obj=None):
         """delete from the current database session obj if not None"""
         if obj is not None:
             self.__session.delete(obj)
 
+           
     def reload(self):
         """reloads data from the database"""
         Base.metadata.create_all(self.__engine)
@@ -71,16 +76,19 @@ class DBStorage:
         Session = scoped_session(sess_factory)
         self.__session = Session
 
+
     def close(self):
         """call remove() method on the private session attribute"""
         self.__session.remove()
-           
+
+          
     def get(self, cls, id):
         """method to retrieve an object based on cls and id"""
         try:
             return self.all(cls).get("{}.{}".format(cls, id))
         except:
             return None
+
 
     def count(self, cls=None):
         """method to count the number of objects in storage"""
