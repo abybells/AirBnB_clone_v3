@@ -71,10 +71,11 @@ class FileStorage:
  
     def get(self, cls, id):
         """method to retrieve an object based on cls and id"""
-        try:
-            return self.all(cls).get("{}.{}".format(cls, id))
-        except:
-            return None
+        if cls and id:
+            fetch_obj = "{}.{}".format(cls, id)
+            all_obj = self.all(cls)
+            return all_obj.get(fetch_obj)
+        return None
 
     def count(self, cls=None):
         """Method to count number of objects in storage"""
