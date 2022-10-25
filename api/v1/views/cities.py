@@ -30,7 +30,7 @@ def get_city(city_id):
     return jsonify(city.to_dict())
 
 
-@app_views.route('/cities/<string:city_id>'
+@app_views.route('/cities/<string:city_id>',
                  methods=['DELETE'], strict_slashes=False)
 def delete_city(city_id):
     """delete city based on city_id"""
@@ -60,8 +60,8 @@ def post_city(state_id):
     return make_response(jsonify(city.to_dict()), 201)
 
 
-@app_views.route('/cities/<string:city_id>'
-                 methods=['GET'], strict_slashes=False)
+@app_views.route('/cities/<string:city_id>',
+                 methods=['PUT'], strict_slashes=False)
 def put_city(city_id):
     """update a city by city_id reference"""
     city = storage.get("City", city_id)
