@@ -8,7 +8,9 @@ from models.city import City
 from models.place import Place
 from models.user import User
 
-@app_views.route('/cities/<string:city>/places', methods=['GET'], strict_slashes=False)
+
+@app_views.route('/cities/<string:city>/places',
+                 methods=['GET'], strict_slashes=False)
 def get_places(city_id):
     """get all places in a specified city"""
     city = storage.get("City", city_id)
@@ -20,7 +22,8 @@ def get_places(city_id):
     return jsonify(places)
 
 
-@app_views.route('/places/<string:place_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/places/<string:place_id>',
+                 methods=['GET'], strict_slashes=False)
 def get_place(place_id):
     """get place info by place_id"""
     place = storage.get("Place", place_id)
@@ -29,7 +32,8 @@ def get_place(place_id):
     return jsonify(place.to_dict())
 
 
-@app_views.route('/places/<string:place_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/places/<string:place_id>',
+                 methods=['DELETE'], strict_slashes=False)
 def delete_place(place_id):
     """delete place info by place_id"""
     place = storage.get("Place", place_id)
@@ -40,7 +44,8 @@ def delete_place(place_id):
     return (jsonify({}))
 
 
-@app_views.route('/cities/<string:city_id>/places', method=['POST'], strict_slashes=False)
+@app_views.route('/cities/<string:city_id>/places',
+                 method=['POST'], strict_slashes=False)
 def post_place(city_id):
     """create new place in a city identified by city_id"""
     city = storage.get("City", city_id)
@@ -62,7 +67,8 @@ def post_place(city_id):
     return make_response(jsonify(place.to_dict()), 201)
 
 
-@app_views.route('places/<string:place_id>', method=['PUT'], strict_slashes=False)
+@app_views.route('places/<string:place_id>',
+                 method=['PUT'], strict_slashes=False)
 def put_place(place_id):
     """update a place identified with place_id"""
     place = storage.get("Place", place_id)
@@ -77,7 +83,8 @@ def put_place(place_id):
     return jsonify(place.to_dict())
 
 
-@app_views.route('/places_search', methods=['POST'], strict_slashes=False)
+@app_views.route('/places_search',
+                 methods=['POST'], strict_slashes=False)
 def post_places_search():
     """searches for a place"""
     if request.get_json() is not None:
@@ -115,4 +122,3 @@ def post_places_search():
         return jsonify(confirmed_places)
     else:
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
-
