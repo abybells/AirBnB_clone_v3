@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """views for amenities"""
+
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
 from models import storage
@@ -8,17 +9,17 @@ from models.amenity import Amenity
 
 @app_views.route('/amenities',
                  methods=['GET'], strict_slashes=False)
-def all_amenities():
+def get_amenities():
     """get amenity information for all amenities"""
     amenities = []
-    for key, value in storage.all("Amenity").item():
-        amenities.append(value.to_dict())
+    for amenity in storage.all("Amenity").item():
+        amenities.append(amenity.to_dict())
     return jsonify(amenities)
 
 
 @app_views.route('/amenities/<string:amenity_id>',
                  methods=['GET'], strict_slashes=False)
-def obj_amenity(amenity_id):
+def get_amenity(amenity_id):
     """get amenity info. by amenity_id"""
     amenity = storage.get("Amenity", amenity_id)
     if amenity is None:
