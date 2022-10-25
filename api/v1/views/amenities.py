@@ -49,7 +49,7 @@ def post_amenity():
         return make_response(jsonify({'error': 'Missing name'}), 400)
     amenity = Amenity(**request.get_json())
     amenity.save()
-    return make_response.get_json(jsonify(amenity.to_dict()), 201)
+    return (jsonify(amenity.to_dict()), 201)
 
 
 @app_views.route('/amenities/<string:amenity_id>',
