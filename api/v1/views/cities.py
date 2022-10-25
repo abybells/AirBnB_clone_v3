@@ -31,7 +31,7 @@ def get_city(city_id):
 
 
 @app_views.route('/cities/<string:city_id>'
-                 methods=['GET'], strict_slashes=False)
+                 methods=['DELETE'], strict_slashes=False)
 def delete_city(city_id):
     """delete city based on city_id"""
     city = storage.get("City", city_id)
