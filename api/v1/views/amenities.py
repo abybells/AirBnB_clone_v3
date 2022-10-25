@@ -39,7 +39,7 @@ def delete_amenity(amenity_id):
     return (jsonify({}), 200)
 
 
-@app_views.route('/amenity', methods=['POST'],
+@app_views.route('/amenities', methods=['POST'],
                  strict_slashes=False)
 def post_amenity():
     """create new amenity"""
@@ -52,7 +52,7 @@ def post_amenity():
     return make_response.get_json(jsonify(amenity.to_dict()), 201)
 
 
-@app_views.route('/amenity/<string:amenity_id>',
+@app_views.route('/amenities/<string:amenity_id>',
                  methods=['PUT'], strict_slashes=False)
 def put_amenity(amenity_id):
     """update an amenity"""
