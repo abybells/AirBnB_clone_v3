@@ -24,6 +24,6 @@ def status():
 def stats():
     """display number of objects by type"""
     return_dict = {}
-    for key, value in all_classes.item():
-        return_dict[key] = storage.count(value)
-        return jsonify(return_dict)
+    for key, value in all_classes.items():
+        return_dict[value] = storage.count(key)
+    return jsonify(return_dict)
