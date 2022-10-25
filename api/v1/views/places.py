@@ -8,7 +8,7 @@ from models.place import Place
 from models.user import User
 
 
-@app_views.route('/cities/<string:city>/places',
+@app_views.route('/cities/<string:city_id>/places',
                  methods=['GET'], strict_slashes=False)
 def get_places(city_id):
   """get all places in a specified city"""
