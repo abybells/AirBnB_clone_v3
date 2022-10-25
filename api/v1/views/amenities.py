@@ -20,7 +20,7 @@ def all_amenities():
                  methods=['GET'], strict_slashes=False)
 def obj_amenity(amenity_id):
     """get amenity info. by amenity_id"""
-    amenity = storage.get(Amenity, amenity_id)
+    amenity = storage.get("Amenity", amenity_id)
     if amenity is None:
         abort(404)
     return jsonify(amenity.to_dict())
@@ -30,7 +30,7 @@ def obj_amenity(amenity_id):
                  methods=['DELETE'], strict_slashes=False)
 def delete_amenity(amenity_id):
     """delete amenity by amenity_id"""
-    amenity = storage.get(Amenity, amenity_id)
+    amenity = storage.get("Amenity", amenity_id)
     if amenity is None:
         abort(404)
     amenity.delete()
@@ -55,7 +55,7 @@ def post_amenity():
                  methods=['PUT'], strict_slashes=False)
 def put_amenity(amenity_id):
     """update an amenity"""
-    amenity = storage.get(Amenity, amenity_id)
+    amenity = storage.get("Amenity", amenity_id)
     if amenity is None:
         abort(404)
     if not request.get_json():
