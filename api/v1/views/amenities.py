@@ -7,7 +7,8 @@ from models import storage
 from models.amenity import Amenity
 
 
-@app_views.route('/amenities', methods=['GET'], strict_slashes=False)
+@app_views.route('/amenities',
+                 methods=['GET'], strict_slashes=False)
 def get_amenity():
     """get amenity information for all amenities"""
     amenities = []
@@ -16,7 +17,8 @@ def get_amenity():
     return jsonify(amenities)
 
 
-@app_views.route('/amenities/<string:amenity_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/amenities/<string:amenity_id>',
+                 methods=['GET'], strict_slashes=False)
 def get_amenity(amenity_id):
     """get amenity info. by amenity_id"""
     amenity = storage.get("Amenity", amenity_id)
@@ -24,7 +26,9 @@ def get_amenity(amenity_id):
         abort(404)
     return jsonify(amenity.to_dict())
 
-@app_views,route('/amenities/<string:amenity_id>', methods=['DELETE'], strict_slashes=False)
+
+@app_views,route('/amenities/<string:amenity_id>',
+                 methods=['DELETE'], strict_slashes=False)
 def delete_amenity(amenity_id):
     """delete amenity by amenity_id"""
     amenity = storage.get("Amenity", amenity_id)
@@ -35,7 +39,8 @@ def delete_amenity(amenity_id):
     return (jsonify({}))
 
 
-@app_views.route('/amenity', methods=['POST'], strict_slashes=False)
+@app_views.route('/amenity', methods=['POST'],
+                 strict_slashes=False)
 def post_amenity():
     """create new amenity"""
     if not request.get_json():
@@ -47,7 +52,8 @@ def post_amenity():
     return make_response.get_json(jsonify(amenity.to_dict()), 201)
 
 
-@app_views.route('/amenity/<string:amenity_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/amenity/<string:amenity_id>',
+                 methods=['PUT'], strict_slashes=False)
 def put_amenity(amenity_id):
     """update an amenity"""
     amenity = storage.get("Amenity", amenity_id)
