@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """views for places"""
 
-from app.v1.views import app_views
+from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
 from models import storage
 from models.city import City
