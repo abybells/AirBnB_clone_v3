@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """views for amenities"""
-
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
 from models import storage
@@ -21,7 +20,7 @@ def all_amenities():
                  methods=['GET'], strict_slashes=False)
 def obj_amenity(amenity_id):
     """get amenity info. by amenity_id"""
-    amenity = storage.get("Amenity", amenity_id)
+    amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
     return jsonify(amenity.to_dict())
@@ -31,12 +30,12 @@ def obj_amenity(amenity_id):
                  methods=['DELETE'], strict_slashes=False)
 def delete_amenity(amenity_id):
     """delete amenity by amenity_id"""
-    amenity = storage.get("Amenity", amenity_id)
+    amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
     amenity.delete()
     storage.save()
-    return (jsonify({}))
+    return (jsonify({}), 200)
 
 
 @app_views.route('/amenity', methods=['POST'],
@@ -56,7 +55,7 @@ def post_amenity():
                  methods=['PUT'], strict_slashes=False)
 def put_amenity(amenity_id):
     """update an amenity"""
-    amenity = storage.get("Amenity", amenity_id)
+    amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
     if not request.get_json():
@@ -65,4 +64,4 @@ def put_amenity(amenity_id):
         if attr not in ['id', 'created_at', 'updated_at']:
             setattr(amenity, attr, val)
     amenity.save()
-    return jsonify(amenity.to_dict())
+    return (jsonify(amenity.to_dict()), 200)
