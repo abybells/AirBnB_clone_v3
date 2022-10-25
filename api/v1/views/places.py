@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """views for places"""
+
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
 from models import storage
@@ -51,15 +52,18 @@ def post_place(city_id):
   if city is None:
     abort(404)
   if not request.get_json():
-    return make_response(jsonify({'error': 'Not a JSON'}))
+    return make_response(jsonify({'error':
+                                  'Not a JSON'}), 400)
   kwargs = request.get_json()
   if 'user_id' not in kwargs:
-    return make_response(jsonify({'error': 'Missing user_id'}), 400)
+    return make_response(jsonify({'error':
+                                  'Missing user_id'}), 400)
   user = storage.get("User", kwargs['user_id'])
   if user is None:
     abort(404)
   if 'name' not in kwargs:
-    return make_response(jsonify({'error': 'Missing name'}), 400)
+    return make_response(jsonify({'error':
+                                  'Missing name'}), 400)
   kwargs['city_id'] = city_id
   place = Place(**kwargs)
   place.save()
