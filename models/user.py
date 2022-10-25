@@ -35,6 +35,10 @@ class User(BaseModel, Base):
     Security Improvements
     set password to MD5 value
     """
+    @property
+    def password(self):
+        return self.__password
+    
     @password.setter
     def password(self, pwd):
         """hashing password values"""
