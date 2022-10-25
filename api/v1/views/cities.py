@@ -8,7 +8,7 @@ from models.city import City
 from models.state import State
 
 
-@app_views.route('/states/<string:state:id>/cities',
+@app_views.route('/states/<string:state_id>/cities',
                  methods=['GET'], strict_slashes=False)
 def get_cities(state_id):
     """get city information for all cities
