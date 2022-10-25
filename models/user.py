@@ -35,8 +35,11 @@ class User(BaseModel, Base):
     Security Improvements
     set password to MD5 value
     """
-    def __setattr__(self, key, value):
-        """set encrypted password for users"""
-        if key == 'password':
-            value = md5(value.encode()).hexdigest()
-        super().__setattr__(key, value)
+    @property
+    def password(self):
+        return self.__password
+    
+    @password.setter
+    def password(self, pwd):
+        """hashing password values"""
+        self.__password = hashlib.md5(pwd.encode()).hexdigest()
