@@ -59,7 +59,7 @@ def put_state(state_id):
     if state is None:
         abort(404)
     if not request.get_json():
-        return make_response(jsonify({'error:' 'Not a JSON'}), 400)
+        abort(400, description="Not a JSON")
     for attr, val in ['id', 'created_at', 'updated_at']:
         setattr(state, attr, val)
     state.save()
