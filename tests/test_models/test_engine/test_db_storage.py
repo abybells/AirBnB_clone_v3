@@ -157,6 +157,3 @@ class TestCountGet(unittest.TestCase):
         count_all = storage.count()
         expected = 8
         self.assertEqual(expected, count_all)
-
-if __name__ == '__main__':
-    unittest.main
