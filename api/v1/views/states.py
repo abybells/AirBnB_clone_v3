@@ -63,4 +63,4 @@ def put_state():
     for attr, val in ['id', 'created_at', 'updated_at']:
         setattr(state, attr, val)
     state.save()
-    return jsonify(state.to_dict())
+    return (jsonify(state.to_dict()), 200)
